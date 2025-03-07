@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Project.Entities.DTOs.CommentDTO>
+
+@{
+    ViewData["Title"] = "GetComments";
+}
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Yorum No
+            </th>
+            <th>
+                İçerik
+            </th>
+            <th>
+               Blog No
+            </th>
+            <th>
+                Onay Durumu
+            </th>
+            <th>
+                Kullanıcı No
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.Checked == Project.Entities.Enums.Checked.Approved ? "" : "unchecked-row")">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                <td>@(item.Description.Length > 40 ? item.Description.Substring(0, 40) + "..." : item.Description)</td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlogId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Checked)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    <form method="get" asp-controller="Admin" asp-action="EditComment" asp-route-id="@item.Id" class="d-inline">
+                        <button type="submit" class="btn btn-primary">
+                            Düzenle
+                        </button>
+                    </form>
+                    <form method="post" asp-controller="Admin" asp-action="DeleteComment" asp-route-commentId="@item.Id" class="d-inline">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Yorum silinsin mi?');">
+                            Sil
+                        </button>
+                    </form>
+            </tr>
+        }
+    </tbody>
+</table>

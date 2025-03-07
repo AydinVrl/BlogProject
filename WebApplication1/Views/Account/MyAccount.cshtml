@@ -1,0 +1,102 @@
+﻿@using Project.Entities.DTOs
+@model Project.Entities.Models.BlogUser
+@{
+    ViewData["Title"] = "MyAccount";
+    var blogs = ViewBag.Blogs as List<BlogDTO>;
+}
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card account-card">
+                <div class="d-flex justify-content-center mt-3">
+                    @if (!string.IsNullOrEmpty(Model.PictureUrl))
+                    {
+                        <img src="@Url.Content(Model.PictureUrl)" alt="User Image" class="card-img-top mx-auto" style="max-width: 100px; max-height: 150px;" />
+                    }
+                    else
+                    {
+                        <img src="@Url.Content("~/images/profileIcon.jpg")" alt="User Image" class="img-fluid mb-4 mx-auto" style="max-width: 100px; max-height: 150px;" />
+                    }
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><p><strong>Ad Soyad:</strong> @Model.FirstName @Model.LastName</p></li>
+                    <li class="list-group-item"><p><strong>Kullanıcı Adı:</strong> @Model.UserName</p></li>
+                    <li class="list-group-item"><p><strong>Email:</strong> @Model.Email</p></li>
+                </ul>
+                <div class="card-body d-flex justify-content-between gap-2">
+                    <a href="@Url.Action("EditUser", "Account", new { userId = Model.Id })" class="btn btn-dark btn-sm">Bilgileri Güncelle</a>
+                    <a href="@Url.Action("Create", "Blog")" class="btn btn-warning btn-sm">Yeni Blog Ekle</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 offset-md-1">
+           
+            @if (blogs != null && blogs.Any())
+            {
+                <div class="row">
+                    @foreach (var blog in blogs)
+                    {
+                        <div class="col-md-6 mb-4">
+                            <div class="card shadow-sm userBlogCard h-100">
+
+                                <div class="card-header bg-dark text-white text-center">
+                                    <h5 class="mb-0">@string.Join(", ", blog.CategoryNames ?? new List<string>())</h5>
+                                    <h5 class="mb-0">
+                                        @switch (blog.Checked)
+                                        {
+                                            case Project.Entities.Enums.Checked.Pending:
+                                                <span class="text-warning">Onay Sürecinde</span>
+                                                ;
+                                                break;
+                                            case Project.Entities.Enums.Checked.Approved:
+                                                <span class="text-success">Onaylandı</span>
+                                                ;
+                                                break;
+                                            case Project.Entities.Enums.Checked.Unapproved:
+                                                <span class="text-danger">Onaylanmamış</span>
+                                                ;
+                                                break;
+                                            default:
+                                                <span>@blog.Checked</span>
+                                                ;
+                                                break;
+                                        }
+                                    </h5>
+                                </div>
+                                <a href="@Url.Action("EditBlog", "Blog", new { id = blog.Id })" class="text-decoration-none text-dark">
+                                    <div class="card-body">
+                                        <h4 class="card-title">
+                                            <span>
+                                                @{
+                                                    var plainTitle = System.Text.RegularExpressions.Regex.Replace(blog.Title, "<.*?>", "");
+                                                    var trimmedTitle = plainTitle.Substring(0, Math.Min(plainTitle.Length, 17));
+                                                }
+                                                @(plainTitle.Length > 17 ? trimmedTitle + "..." : trimmedTitle)
+                                            </span>
+                                        </h4>
+                                        <p class="card-text">
+                                            @{
+                                                var plainText = System.Text.RegularExpressions.Regex.Replace(blog.Description, "<.*?>", "");
+                                                var trimmedText = plainText.Substring(0, Math.Min(plainText.Length, 97));
+                                            }
+                                            @(plainText.Length > 97 ? trimmedText + "..." : trimmedText)
+                                        </p>
+                                        <hr/>
+                                        <p><b>@blog.isClicked</b>'Tıklandı.</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div> 
+            }
+            else
+            {
+                <p class="text-center">Henüz blog yazınız yok.</p>
+            }
+        </div>
+
+    </div>
+</div>
+

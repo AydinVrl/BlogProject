@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Entity.Models.Category>
+
+@{
+    ViewData["Title"] = "GetCategory";
+}
+
+
+<p>
+    <a asp-action="CreateCategory" class="btn btn-warning">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kategori No
+            </th>
+            <th>
+                Kategori Adı
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                    <form method="get" asp-controller="Admin" asp-action="EditCategory" asp-route-id="@item.Id" class="d-inline">
+                        <button type="submit" class="btn btn-warning">
+                            Düzenle
+                        </button>
+                    </form>
+                    <form method="post" asp-controller="Admin" asp-action="DeleteCategory" asp-route-catId="@item.Id" class="d-inline">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Bu kategoriyi silmek istediğinize emin misiniz?');">
+                            Sil
+                        </button>
+                    </form>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,26 @@
+﻿@model Project.Entities.DTOs.CategoryDTO
+@{
+    ViewData["Title"] = "EditCategory";
+}
+
+
+
+<div class="container mt-4">
+    <div class="card shadow-sm p-4">
+        <h3 class="mb-3">Kategori Düzenle</h3>
+        <form method="post" asp-controller="Admin" asp-action="EditCategory">
+            <div class="mb-3">
+                <label for="Id" class="form-label">ID</label>
+                <input type="text" class="form-control" id="Id" name="Id" value="@Model.Id" readonly />
+            </div>
+            <div class="mb-3">
+                <label for="CategoryName" class="form-label">Kategori Adı</label>
+                <input type="text" class="form-control" id="CategoryName" name="CategoryName" value="@Model.CategoryName" required />
+            </div>
+            <button type="submit" class="btn btn-warning">Güncelle</button>
+            
+        </form>
+    </div>
+</div>
+
+

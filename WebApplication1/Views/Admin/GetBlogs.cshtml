@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Entity.Models.Blog>
+
+@{
+    ViewData["Title"] = "GetBlogs";
+}
+
+
+
+<p>
+    <a asp-action="CreateBlog" class="btn btn-warning">Yeni Blog Ekle</a>
+</p>
+
+<form asp-action="GetBlogs" method="get">
+    <label for="statusFilter">Onay Durumuna Göre Sırala</label>
+    <select id="statusFilter" name="isChecked" class="form-control" onchange="this.form.submit()">
+        <option value="">All</option>
+        <option value="true" selected="@(ViewBag.CheckedStatus?.ToString() == "True" ? "selected" : null)">Checked</option>
+        <option value="false" selected="@(ViewBag.CheckedStatus?.ToString() == "False" ? "selected" : null)">Unchecked</option>
+    </select>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Başlık</th>
+            <th>İçerik</th>
+            <th>Onay</th>
+            <th>Kategoriler</th>
+            <th>Kullanıcı No</th>
+            <th>Yorumlar</th> <!-- New column for comments -->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.Checked == Project.Entities.Enums.Checked.Approved ? "" : "unchecked-row")">
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@(item.Description.Length > 40 ? item.Description.Substring(0, 40) + "..." : item.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Checked)</td>
+                <td>@if (item.BlogCategories.Any())
+    {
+        <ul>
+            @foreach (var blogCategory in item.BlogCategories)
+            {
+                <li>@blogCategory.Category.CategoryName</li> <!-- Display the CategoryName -->
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No categories</p>
+    }</td>
+                <td>@Html.DisplayFor(modelItem => item.UserId)</td>
+                <td>
+                    @if (item.Comments.Any())
+                    {
+                        <ul>
+                            @foreach (var comment in item.Comments)
+                            {
+                                <li>@comment.User.Email</li> <!-- Display comment text -->
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <p>Yorum Yok</p>
+                    }
+                </td>
+                <td>
+                    <button class="btn btn-primary" onclick="location.href='@Url.Action("EditBlog", new { id = item.Id })'">Düzenle</button> 
+                    <button class="btn btn-info" onclick="location.href='@Url.Action("CreateComment", new { id = item.Id })'">Yorum</button> 
+                    <button class="btn btn-danger" onclick="location.href='@Url.Action("Delete", new { id = item.Id })'">Sil</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

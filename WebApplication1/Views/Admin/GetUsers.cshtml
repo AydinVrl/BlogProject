@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Project.Entities.VMs.UserVM>
+
+@{
+    ViewData["Title"] = "GetUsers";
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Kullanıcı No
+            </th>
+            <th>
+                Kullanıcı Adı
+            </th>
+            <th>
+                Kullanıcı Rolü
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <th>
+                    @string.Join(" | ", item.Roles)
+                </th>
+                <td>
+                    <form method="get" asp-controller="Admin" asp-action="RoleManage" asp-route-id="@item.Id" class="d-inline">
+                        <button type="submit" class="btn btn-danger">
+                            Yetki Ver
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

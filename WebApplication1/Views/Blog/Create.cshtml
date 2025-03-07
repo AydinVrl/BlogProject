@@ -1,0 +1,72 @@
+﻿@model Project.Entities.VMs.BlogCreateVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<br />
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-8">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <label>Kategoriler</label>
+                <div id="categoryCheckboxList" class="category-list">
+                    @foreach (var category in ViewBag.Categories)
+                    {
+                        <div class="form-check category-item">
+                            <input class="form-check-input category-checkbox" type="checkbox"
+                                   id="category_@category.Value"
+                                   name="CategoryIds"
+                                   value="@category.Value">
+                            <label class="form-check-label" for="category_@category.Value">@category.Text</label>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                <label>Seçilen Kategoriler:</label>
+                <div id="selectedCategories" class="border p-2 rounded">
+                    <span class="text-muted">Henüz kategori seçilmedi.</span>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control w-100" id="jodit-editor"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        Jodit.make('#jodit-editor');
+    </script>
+
+}
+

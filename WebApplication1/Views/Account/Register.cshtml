@@ -1,0 +1,49 @@
+﻿@model Project.Entities.DTOs.RegisterDTO
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-4 custom-card" style="width: 25rem;">
+        <div class="card-body">
+            <h3 class="card-title text-center">Kayıt Ol</h3>
+            <form asp-action="Register">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="UserName" class="control-label">Kullanıcı Adı</label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Email" class="control-label">E-Posta</label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="Password" class="control-label">Şifre</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="ConfrimPass" class="control-label">Şifre Doğrulama</label>
+                    <input asp-for="ConfrimPass" type="password" class="form-control" />
+                    <span asp-validation-for="ConfrimPass" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-4 text-center">
+                    <input type="submit" value="Kayıt Ol" class="btn btn-warning w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

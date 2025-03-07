@@ -1,0 +1,88 @@
+﻿@using Project.Entities.Models
+@model BlogUser
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+
+
+<form asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="userId" name="userId" value="@Model.Id" />
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="FirstName">Ad</label>
+                <input type="text" id="FirstName" name="firstName" class="form-control" value="@Model.FirstName" required />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="LastName">Soyad</label>
+                <input type="text" id="LastName" name="lastName" class="form-control" value="@Model.LastName" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ProfileImage">Profil Resmi</label>
+        <input type="file" id="ProfileImage" name="profileImage" class="form-control" />
+        <small class="form-text text-muted">Choose an image for your profile.</small>
+
+        @if (!string.IsNullOrEmpty(Model.PictureUrl))
+        {
+            <div class="mt-2">
+                <img src="@Model.PictureUrl" width="100" height="100" alt="Profile Picture" class="rounded-circle" />
+            </div>
+        }
+    </div>
+    <div class="mb-3">
+        <button type="button" id="togglePasswordFields" class="btn btn-outline-danger mb-3">
+            Şifreni Değiştir
+        </button>
+    </div>
+    <div id="passwordFields" class="d-none">
+        <div class="form-group">
+            <label for="CurrentPassword">Mevcut Şifre</label>
+            <input type="password" id="CurrentPassword" name="currentPassword" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="NewPassword">Yeni Şifre</label>
+            <input type="password" id="NewPassword" name="newPassword" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <label for="ConfirmNewPassword">Yeni Şifre Doğrulama</label>
+            <input type="password" id="ConfirmNewPassword" name="confirmNewPassword" class="form-control" />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-warning btn-block">Güncelle</button>
+    </div>
+</form>
+
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        <strong>Warning:</strong> You haven't updated every field
+    </div>
+}
+
+@if (ViewData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @ViewData["SuccessMessage"]
+    </div>
+}
+
+<script>
+    document.getElementById("togglePasswordFields").addEventListener("click", function () {
+        var passwordFields = document.getElementById("passwordFields");
+        passwordFields.classList.toggle("d-none");
+    });
+</script>
+

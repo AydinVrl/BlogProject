@@ -1,0 +1,81 @@
+﻿@using Project.Entities.DTOs
+@using Project.Entities.VMs
+@model MyFavoritesVM
+
+@{
+    ViewData["Title"] = "MyFavorites";
+}
+
+<div class="container d-flex justify-content-center mt-5">
+    <div class="row w-75">
+
+        <div class="col-md-5">
+            <h2 class="text-center mb-4">Favori Yazarlar</h2>
+            @if (Model.FavoriteAuthors.Any())
+            {
+                <div class="row">
+                    @foreach (var author in Model.FavoriteAuthors)
+                    {
+                        <div class="col-12 mb-3">
+                            <div class="card shadow-sm userBlogCard">
+                                <div class="card-body">
+                                    <h5 class="card-title">@author.FirstName @author.LastName</h5>
+                                    <p class="card-text">@author.UserName</p>
+                                    <a href="@Url.Action("UserProfile", "Account", new { userId = author.Id })" class="btn btn-warning btn-sm">Profili Gör</a>
+                                    <form method="post" asp-controller="Blog" asp-action="AddToAuthorFav" asp-route-authorId="@author.Id" class="d-inline">
+                                        <button type="submit" class="btn btn-outline-warning">
+                                            <img src="~/images/star1.png" alt="Star Icon" width="20" height="20" />
+                                            @* @(item.isFavorite ? "Remove from Favorites" : "Add to Favorites") *@
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-center">Henüz bir yazarı favorilemedin.</p>
+            }
+        </div>
+        <div class="col-md-7">
+            <h2 class="text-center mb-4">Favori Bloglar</h2>
+            @if (Model.FavoriteBlogs.Any())
+            {
+                <div class="row">
+                    @foreach (var blog in Model.FavoriteBlogs)
+                    {
+                        <div class="col-md-12 mb-3">
+                            <div class="card shadow-sm blog-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@blog.Title</h5>
+                                    <p class="card-text">
+                                        @{
+                                            var plainText = System.Text.RegularExpressions.Regex.Replace(blog.Description, "<.*?>", "");
+                                            var trimmedText = plainText.Substring(0, Math.Min(plainText.Length, 250));
+                                        }
+                                        @(plainText.Length > 250 ? trimmedText + "..." : trimmedText)
+                                        </p>
+                                    <form method="post" asp-controller="Blog" asp-action="AddToFavorites" asp-route-blogId="@blog.Id" class="d-inline">
+                                        <button type="submit" class="btn btn-outline-warning">
+                                            <img src="~/images/star1.png" alt="Star Icon" width="20" height="20" />
+                                            @* @(item.isFavorite ? "Remove from Favorites" : "Add to Favorites") *@
+                                        </button>
+                                    </form>
+                                    <a asp-controller="Blog" asp-action="Detail" asp-route-id="@blog.Id" class="btn btn-warning">Detay</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-center">Henüz bir blog favorilemedin.</p>
+            }
+        </div>
+
+    </div>
+</div>
+

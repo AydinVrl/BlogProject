@@ -1,0 +1,82 @@
+﻿@model Project.Entities.DTOs.BlogDTO
+
+@{
+    ViewData["Title"] = "CreateBlog";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm p-4 card">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+                <form asp-action="CreateBlog" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label">Başlık</label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label">İçerik</label>
+                        <textarea asp-for="Description" class="form-control w-100" id="jodit-editor" name="Description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <!-- User DropDown (Select a User) -->
+                    <div class="form-group">
+                        <label asp-for="UserId" class="control-label">Kullanıcı Seç</label>
+                        <select asp-for="UserId" class="form-control">
+                            <option value="">-- Select User --</option>
+                            @foreach (var user in ViewBag.Users as SelectList)
+                            {
+                                <option value="@user.Value">@user.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="UserId" class="text-danger"></span>
+                    </div>
+                    <br />
+                    <!-- Category DropDown (Select a Category) -->
+                    <div class="form-group">
+                        <label>Kategoriler</label>
+                        <div id="categoryCheckboxList" class="category-list">
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                <div class="form-check category-item">
+                                    <input class="form-check-input category-checkbox" type="checkbox"
+                                           id="category_@category.Value"
+                                           name="CategoryIds"
+                                           value="@category.Value">
+                                    <label class="form-check-label" for="category_@category.Value">@category.Text</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label>Seçilen Kategoriler:</label>
+                        <div id="selectedCategories" class="border p-2 rounded">
+                            <span class="text-muted">Henüz kategori seçilmedi.</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="submit" value="Oluştur" class="btn btn-warning" />
+                    </div>
+                </form>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        Jodit.make('#jodit-editor');
+    </script>
+}

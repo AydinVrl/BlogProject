@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    int bCount = ViewBag.blogCount;
+    int uCount = ViewBag.userCount;
+    int cCount = ViewBag.categoryCount;
+    int coCount = ViewBag.commentCount;
+}
+
+<br />
+
+    <div class="row">
+        <div class="col-md-4">
+            <a asp-action="GetBlogs" class="text-white">
+                <div class="card admin-card mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">Bloglar</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text my-3">Toplam Blog: <b>@bCount</b></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="GetUsers" class="text-white">
+                <div class="card admin-card mb-3" style="max-width: 18rem;">
+                    <div class="card-header"><h5 class="Kullanıcılar">User Card</h5></div>
+                    <div class="card-body">
+                        <p class="card-text my-3">Toplam Kullanıcı: <b>@uCount</b></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="GetCategory" class="text-white">
+                <div class="card admin-card mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">Kategoriler</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text my-3">Toplam Kategori: <b>@cCount</b></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a asp-action="GetComments" class="text-white">
+                <div class="card admin-card mb-3" style="max-width: 18rem;">
+                    <div class="card-header">
+                        <h5 class="card-title">Yorumlar</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text my-3">Toplam Yorum: <b>@coCount</b></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+

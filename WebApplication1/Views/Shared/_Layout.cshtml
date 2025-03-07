@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData[""] FullStackBlog's</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+   
+
+    <!-- jodit Editor CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/jodit@latest/es2021/jodit.fat.min.css"
+          rel="stylesheet"
+          type="text/css" />
+
+</head>
+<body>
+    <header>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3" style="background-color: #d58a11;">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <a class="navbar-brand text-dark" asp-area="" asp-controller="Blog" asp-action="Index">
+            <b>FullStackBlog's</b>
+        </a>
+        <div class="search-wrapper">
+            <form method="get" asp-controller="Blog" asp-action="Index" class="search-container">
+                <input name="search" type="search" placeholder="Başlık Ara" aria-label="Search">
+                <button type="submit">
+                    <img src="~/images/search.png" alt="Search">
+                </button>
+            </form>
+        </div>
+        <div class="navbar-nav d-flex gap-2">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <li class="nav-item">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="btn navbar-button" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
+                            }
+                            else if (User.IsInRole("Editor"))
+                            {
+                                <a class="btn navbar-button" asp-area="" asp-controller="Editor" asp-action="Index">Editor Panel</a>
+                            }
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn navbar-button" asp-area="" asp-controller="Account" asp-action="MyAccount">Hesabım</a>
+                    </li>
+                        <li class="nav-item">
+                            <a class="btn navbar-button" asp-area="" asp-controller="Account" asp-action="MyFavorites">Favorilerim</a>
+                        </li>
+                    <li class="nav-item">
+                        <a class="btn navbar-button" asp-area="" asp-controller="Account" asp-action="Logout">Çıkış</a>
+                    </li>
+                    }
+                    else
+                    {
+                    <li class="nav-item">
+                        <a class="btn navbar-button" asp-area="" asp-controller="Account" asp-action="Register">Kayıt Ol</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn navbar-button" asp-area="" asp-controller="Account" asp-action="Login">Giriş</a>
+                    </li>
+                    }
+        </div>
+    </div>
+</nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container" style="text-align: center; font-weight: bold;">
+            &copy; 2025 * KD-24 FinalProject * FullStackBlog's
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/jodit@latest/es2021/jodit.fat.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

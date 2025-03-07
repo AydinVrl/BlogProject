@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Project.Entities.DTOs.BlogDTO>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <!-- Sol Taraf: En Çok Okunanlar -->
+        <div class="col-md-3">
+            <div class="card shadow-sm p-3 index-container">
+                <h5 class="card-header bg-dark text-white text-center">En Çok Okunanlar</h5>
+                <ul class="list-group list-group-flush">
+                    @if (ViewBag.MostReadBlogs != null)
+                    {
+                        @foreach (var blog in ViewBag.MostReadBlogs)
+                        {
+                            <li class="list-group-item">
+                                <a asp-controller="Blog" asp-action="Detail" asp-route-id="@blog.Id" class="no-link-style">
+                                    <span class="badge bg-warning">@blog.isClicked </span>
+                                    <span>
+                                        @{
+                                            var plainTitle = System.Text.RegularExpressions.Regex.Replace(blog.Title, "<.*?>", "");
+                                            var trimmedTitle = plainTitle.Substring(0, Math.Min(plainTitle.Length, 17));
+                                        }
+                                        @(plainTitle.Length > 17 ? trimmedTitle + "..." : trimmedTitle)
+                                    </span>
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item">Henüz veri yok.</li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf: Mevcut Bloglar -->
+        <div class="col-md-9">
+            <div class="card shadow-sm p-4 index-container">
+                <div class="row justify-content-center">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-6 mb-4">
+                            <div class="card blog-card rounded-4 overflow-hidden">
+                                <h5 class="card-header text-white bg-dark">
+                                    @string.Join(", ", item.CategoryNames)
+                                </h5>
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <span>
+                                            @{
+                                                var plainTitle = System.Text.RegularExpressions.Regex.Replace(item.Title, "<.*?>", "");
+                                                var trimmedTitle = plainTitle.Substring(0, Math.Min(plainTitle.Length, 40));
+                                            }
+                                            @(plainTitle.Length > 40 ? trimmedTitle + "..." : trimmedTitle)
+                                        </span>
+                                    </h5>
+                                    <p class="card-text">
+                                        @{
+                                            var plainText = System.Text.RegularExpressions.Regex.Replace(item.Description, "<.*?>", "");
+                                            var trimmedText = plainText.Substring(0, Math.Min(plainText.Length, 97));
+                                        }
+                                        @(plainText.Length > 97 ? trimmedText + "..." : trimmedText)
+                                    </p>
+                                    <form method="post" asp-controller="Blog" asp-action="AddToFavorites" asp-route-blogId="@item.Id" class="d-inline">
+                                        <button type="submit" class="btn btn-outline-warning">
+                                            <img src="@Url.Content(item.isFavorite ? "~/images/star1.png" : "~/images/star0.png")" alt="Star Icon" width="20" height="20" />
+                                        </button>
+                                    </form>
+                                    <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id" class="btn btn-warning">Devamını Oku</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="d-flex justify-content-center">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),
+                             new PagedListRenderOptions { LiElementClasses = new[] { "page-item" }, PageClasses = new[] { "page-link" } })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
