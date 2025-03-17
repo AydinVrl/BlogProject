@@ -1,13 +1,27 @@
-🚀 FullStackBlog's: BilgeAdam Boost Final Projemiz! 🚀
+🚀 PratikBlog: BilgeAdam Boost+ Final Projemiz
 
-BilgeAdam Boost+ Yazılımcı Yetiştirme Programı'nın sonunda, ekip olarak FullStackBlog's adlı bir blog platformu geliştirdik! 💡 Bu proje, öğrendiğimiz teknolojileri uygulayarak gerçek bir yazılım geliştirme sürecini deneyimlememizi sağladı.
+BilgeAdam Boost+ Yıldız Yazılımcı Yetiştirme Programı’nın sonunda, Adnan Ozan Öztürk, Batuhan Şahin ve Efe Yaman ile birlikte PratikBlog adlı kapsamlı bir blog platformu geliştirdik. Bu proje, hem .NET Full Stack geliştirme yeteneklerimizi güçlendirmek hem de gerçek bir yazılım geliştirme sürecini deneyimlemek için harika bir fırsat sundu.
 
-🔹 Projede Kullandığımız Teknolojiler:
-🏗️ N-Tier Katmanlı Mimari – Modüler yapı ile yönetimi ve testi kolaylaştırdık.
-💾 MS SQL Server & Entity Framework (Code-First) – Güçlü ve esnek veri yönetimi sağladık.
-🔍 LINQ – Daha okunabilir ve yönetilebilir veri sorgulamaları yazdık.
-💻 .NET Core, ASP.NET Core MVC & Web API, C#, Identity, Dependency Injection – Modern ve güvenli bir backend oluşturduk.
-🎨 HTML5, CSS, Bootstrap, JavaScript – Kullanıcı dostu ve şık bir arayüz tasarladık.
-🚀 Azure DevOps, Git, GitHub, Agile, Scrum – Versiyon kontrolü ve proje yönetimi için en iyi uygulamaları kullandık.
+🛠 Kullandığımız Teknolojiler ve Yaklaşımlar
 
-Bu süreçte ekip çalışması, problem çözme ve proje geliştirme konusunda çok şey öğrendik. Gerçek dünya projelerine hazırız! 🏆
+🔹 Backend & Database:
+ASP.NET Core MVC → Güçlü ve ölçeklenebilir bir backend oluşturduk.
+C# & Entity Framework Core (Code-First Approach) → Veritabanı yönetimini daha esnek ve yönetilebilir hale getirdik.
+MS SQL Server & LINQ → Veri yönetimini ve sorgulama işlemlerini optimize ettik.
+Identity & Authentication → Rol bazlı kullanıcı yönetimi ve güvenlik mekanizmalarını sağladık.
+Dependency Injection (DI) → Gevşek bağımlılıklarla esnek bir yapı inşa ettik.
+🔹 Frontend & UI:
+HTML5, CSS3, Bootstrap & JavaScript → Responsive ve modern bir kullanıcı arayüzü tasarladık.
+Temiz ve kullanıcı dostu bir UI ile blog içeriklerinin rahatça okunabilir olmasını sağladık.
+🔹 Proje Yönetimi & Versiyon Kontrol:
+Agile & Scrum Metodolojisi → Düzenli sprint planlamalarıyla ekip olarak uyum içinde çalıştık.
+Azure DevOps & GitHub → Versiyon kontrolü ve iş takibini verimli bir şekilde yönettik.
+CI/CD süreçlerini temel seviyede deneyimleyerek geliştirme sürecimizi hızlandırdık.
+
+🔥 Proje Kazanımları
+✅ Tam kapsamlı bir blog platformu geliştirdik.
+✅ Gerçek dünya projelerinde kullanılan teknolojileri deneyimledik.
+✅ Ekip çalışması, kod standartları ve temiz kod prensiplerini benimsedik.
+✅ Verimli bir geliştirme süreci için en iyi uygulamaları öğrendik.
+
+Bu proje, yazılım dünyasına sağlam bir giriş yapmak ve Full Stack becerilerimizi geliştirmek açısından harika bir deneyimdi. 🎯
