@@ -17,11 +17,3 @@ Temiz ve kullanıcı dostu bir UI ile blog içeriklerinin rahatça okunabilir ol
 Agile & Scrum Metodolojisi → Düzenli sprint planlamalarıyla ekip olarak uyum içinde çalıştık.
 Azure DevOps & GitHub → Versiyon kontrolü ve iş takibini verimli bir şekilde yönettik.
 CI/CD süreçlerini temel seviyede deneyimleyerek geliştirme sürecimizi hızlandırdık.
-
-🔥 Proje Kazanımları
-✅ Tam kapsamlı bir blog platformu geliştirdik.
-✅ Gerçek dünya projelerinde kullanılan teknolojileri deneyimledik.
-✅ Ekip çalışması, kod standartları ve temiz kod prensiplerini benimsedik.
-✅ Verimli bir geliştirme süreci için en iyi uygulamaları öğrendik.
-
-Bu proje, yazılım dünyasına sağlam bir giriş yapmak ve Full Stack becerilerimizi geliştirmek açısından harika bir deneyimdi. 🎯
