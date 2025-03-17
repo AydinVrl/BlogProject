@@ -16,4 +16,4 @@ Temiz ve kullanıcı dostu bir UI ile blog içeriklerinin rahatça okunabilir ol
 🔹 Proje Yönetimi & Versiyon Kontrol:
 Agile & Scrum Metodolojisi → Düzenli sprint planlamalarıyla ekip olarak uyum içinde çalıştık.
 Azure DevOps & GitHub → Versiyon kontrolü ve iş takibini verimli bir şekilde yönettik.
-CI/CD süreçlerini temel seviyede deneyimleyerek geliştirme sürecimizi hızlandırdık.
+
